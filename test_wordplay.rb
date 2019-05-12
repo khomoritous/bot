@@ -13,4 +13,10 @@ class TestWordPlay < MiniTest::Test
 
     assert_equal('This is the end of the test', test_text.sentences[2])
   end
+
+
+  def test_dividing_sentences_into_words
+    assert_equal(%w{This is a test}, 'This is a test'.words)
+    assert_equal(%w{These are mostly words}, 'These are, mostly, words'.words)
+  end
 end
