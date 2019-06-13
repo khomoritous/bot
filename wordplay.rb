@@ -1,7 +1,8 @@
 class WordPlay
-  def best_sentence(sentences, desired_words)
+
+  def self.best_sentence(sentences, desired_words)
     ranked_sentences = sentences.sort_by do |s|
-      s.words_length = (s.downcase.words - desired_words).length
+      s.words.length - (s.downcase.words - desired_words).length
     end
     ranked_sentences.last
   end
@@ -21,8 +22,9 @@ class WordPlay
       when "my"
         "your"
       end
-    end
+    end.sub(/^me\b/i, 'i')
   end
+
 end
 
 class String
@@ -43,6 +45,8 @@ p %q{
   }.sentences[1].words[1]
 
 p "This is a test of words".words
+
+puts WordPlay.best_sentence(['This is a great test'], %w{still the best})
 
 
 #puts WordPlay.switch_pronouns("Your cat is fighting with my cat")
