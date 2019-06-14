@@ -28,7 +28,11 @@ class TestWordPlay < MiniTest::Test
     assert_equal('This is a great test', WordPlay.best_sentence(['This is a great test'], %w{still the best}))
   end
 
-
+  def test_basic_pronouns
+    assert_equal("i am a robot", WordPlay.switch_pronouns("you are a robot"))
+    assert_equal("you are a person", WordPlay.switch_pronouns("i am a person"))
+    assert_equal("i love you", WordPlay.switch_pronouns("you love me"))
+  end
 
 
 
