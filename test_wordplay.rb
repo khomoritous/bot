@@ -34,6 +34,13 @@ class TestWordPlay < MiniTest::Test
     assert_equal("i love you", WordPlay.switch_pronouns("you love me"))
   end
 
+  def test_mixed_pronouns
+    assert_equal("you gave me life", WordPlay.switch_pronouns("i gave you life"))
+    assert_equal("i am not what you are", WordPlay.switch_pronouns("you are not what i am"))
+    assert_equal("i annoy your dog", WordPlay.switch_pronouns("you annoy my dog"))
+  end
+
+
 
 
 end
