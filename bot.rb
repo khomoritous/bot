@@ -29,5 +29,11 @@ class Bot
     random_index = rand(@data[:responses][key].length)
     @data[:responses][key][random_index].gsub(/\[name\]/, @name)
   end
-end
 
+
+  def response_to(input)
+    prepared_input = preprocess(input).downcase
+  end
+
+
+end
