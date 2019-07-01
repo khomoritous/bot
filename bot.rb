@@ -34,6 +34,7 @@ class Bot
   def response_to(input)
     prepared_input = preprocess(input.downcase)
     sentence = best_sentence(prepared_input)
+    responses = possible_responses(sentence)
   end
 
 
@@ -51,6 +52,9 @@ class Bot
     input
   end
 
+
+  private
+
   def best_sentence(input)
     hot_words = @data[:responses].keys.select do |k|
       k.class == String && k =~ /^\w+$/
@@ -59,6 +63,20 @@ class Bot
     WordPlay.best_sentence(input.sentences, hot_words)
   end
 
+
+  private
+
+  def possible_responses(sentence)
+    responses = []
+    @data[:responses].keys.each do |pattern|
+      next unless pattern.is_a(String)
+      if sentence.match('b' + pattern.gsub(/\*/,'') + ' \b')
+        responses << @data[:responses][pattern]
+      end
+    end
+    responses << @data[:responses][:default] if responses.empty?
+    responses.flatten
+  end
 
 
 end
