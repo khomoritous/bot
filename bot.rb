@@ -32,7 +32,8 @@ class Bot
 
 
   def response_to(input)
-    prepared_input = preprocess(input).downcase
+    prepared_input = preprocess(input.downcase)
+    sentence = best_sentence(prepared_input)
   end
 
 
@@ -43,9 +44,21 @@ class Bot
   end
 
 
+  private
+
   def perform_substitutions(input)
     @data[:presubs].each { |s| input.gsub!(s[0], s[1])}
     input
   end
+
+  def best_sentence(input)
+    hot_words = @data[:responses].keys.select do |k|
+      k.class == String && k =~ /^\w+$/
+    end
+
+    WordPlay.best_sentence(input.sentences, hot_words)
+  end
+
+
 
 end
