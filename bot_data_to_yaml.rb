@@ -25,14 +25,6 @@ bot_data = {:presubs => [["dont","don't"], ["youre", "you're"], ["love", "like"]
 
 
 
-
-
-
-
-
-
-
-
 puts bot_data.to_yaml
 
 f = File.open(ARGV.first || 'bot_data', "w")
